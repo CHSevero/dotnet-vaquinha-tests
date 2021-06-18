@@ -41,6 +41,18 @@ namespace Vaquinha.Tests.Common.Fixtures
             return faker.Generate();
         }
 
+        public Endereco EnderecoNumeroInvalido()
+        {
+            var endereco = new Faker("pt_BR").Address;
+            
+            var faker = new Faker<Endereco>("pt_BR");
+
+            faker.CustomInstantiator(f =>
+                 new Endereco(Guid.NewGuid(), "14800-000", endereco.StreetAddress(false), string.Empty, endereco.City(), endereco.StateAbbr(), "16995811385", string.Empty));
+
+            return faker.Generate();
+        }
+
         public Endereco EnderecoVazio()
         {
             return new Endereco(Guid.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty);

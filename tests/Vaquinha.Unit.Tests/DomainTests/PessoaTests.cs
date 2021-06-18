@@ -83,5 +83,21 @@ namespace Vaquinha.Unit.Tests.DomainTests
             pessoa.ErrorMessages.Should().Contain("O campo Nome deve possuir no máximo 150 caracteres.");
             pessoa.ErrorMessages.Should().Contain("O campo Email deve possuir no máximo 150 caracteres.");
         }
+
+        [Fact]
+        [Trait("Pessoa", "Pessoa_NomeVazio_PessoaInvalida")]
+        public void Pessoa_NomeVazio_PessoaInvalida()
+        {
+            // Arrange
+            var pessoa = _fixture.PessoaNomeVazio();
+
+            // Act
+            var valido = pessoa.Valido();
+
+            // Assert
+            valido.Should().BeFalse(because: "O compo nome está vazio.");
+            pessoa.ErrorMessages.Should().HaveCount(1, because: "o campo nome está vazio");
+            pessoa.ErrorMessages.Should().Contain("O campo Nome é obrigatório.");
+        }
     }
 }

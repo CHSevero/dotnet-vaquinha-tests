@@ -27,6 +27,16 @@ namespace Vaquinha.Tests.Common.Fixtures
             return faker.Generate();
         }
 
+        public Pessoa PessoaNomeVazio()
+        {
+            var faker = new Faker<Pessoa>("pt_BR");
+            faker.RuleFor(c => c.MensagemApoio, (f, c) => f.Lorem.Sentence(30));
+            faker.RuleFor(c => c.Nome, String.Empty);
+            faker.RuleFor(c => c.Email, (f, c) => "empty@empty.com");
+
+            return faker.Generate();
+        }
+
         public IEnumerable<Pessoa> PessoaModelValida(int qtd, bool emailInvalido = false)
         {
             var genero = new Faker().PickRandom<Name.Gender>();
@@ -75,5 +85,7 @@ namespace Vaquinha.Tests.Common.Fixtures
             const string TEXTO_COM_MAIS_DE_150_CARACTERES = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             return new Pessoa(Guid.NewGuid(), TEXTO_COM_MAIS_DE_150_CARACTERES, TEXTO_COM_MAIS_DE_150_CARACTERES, false, "AA");
         }
+
+
     }
 }

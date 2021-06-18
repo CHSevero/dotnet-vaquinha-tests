@@ -32,6 +32,22 @@ namespace Vaquinha.Unit.Tests.DomainTests
         }
 
         [Fact]
+        [Trait("Endereco", "Endereco_NumeroNaoPreenchido_EnderecoInvalido")]
+        public void Endereco_NumeroNaoPreenchido_EnderecoInvalido()
+        {
+            // Arrange
+            var endereco = _fixture.EnderecoNumeroInvalido();
+
+            // Act
+            var valido = endereco.Valido();
+
+            // Assert
+            valido.Should().BeFalse(because: "o campo numero vazio");
+            endereco.ErrorMessages.Should().HaveCount(1, "o campo numero está vazio.");
+            endereco.ErrorMessages.Should().Contain("O campo Número deve ser preenchido");
+        }
+
+        [Fact]
         [Trait("Endereco", "Endereco_NenhumDadoPreenchido_EnderecoInvalido")]
         public void Endereco_NenhumDadoPreenchido_EnderecoInvalido()
         {
@@ -92,6 +108,7 @@ namespace Vaquinha.Unit.Tests.DomainTests
             endereco.ErrorMessages.Should().Contain("O campo Número deve possuir no máximo 6 caracteres", because: "o campo Complemento ultrapassou tamanho máximo permitido.");
         }
         
+
 
     }
 }
