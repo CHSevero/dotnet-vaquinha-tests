@@ -1,5 +1,6 @@
 # dotnet-vaquinha-tests
-Projeto Base para Testes - .Net Core  
+Projeto Base para Testes - .Net Core 
+Implementação de testes de integração e teste de unidade a partir do projeto original. 
 
 ## Digital Innovation One
 
